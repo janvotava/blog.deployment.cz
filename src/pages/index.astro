@@ -36,9 +36,9 @@ const posts = unsortedPosts.sort(function (a, b) {
 
 						return <BlogPostPreview
 							title={frontmatter.title}
-							description={firstParagraph.innerText}
+							description={firstParagraph?.innerText || ""}
 							date={frontmatter.date}
-							url={url}
+							url={url!}
 						/>
 					})}
 				</section>
