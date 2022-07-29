@@ -15,6 +15,7 @@
     "@astrojs/svelte": "^0.5.1",
     "@astrojs/tailwind": "^0.2.5",
     "astro": "^1.0.0-rc.2",
+    "node-html-parser": "^5.3.3",
     "svelte": "^3.46.4"
   },
   "dependencies": {

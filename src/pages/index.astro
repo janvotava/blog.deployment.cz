@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import BlogPostPreview from "../components/BlogPostPreview.astro";
+import { parse as parseHtml } from "node-html-parser";
 
 let title = "Jan Votava's Blog";
 let description = "Random brainstorming about Rust, Typescript, Frontend development and other stuff.";
@@ -29,14 +30,17 @@ const posts = unsortedPosts.sort(function (a, b) {
 					<p>{description}</p>
 				</section> -->
 				<section aria-label="Blog post list">
-					{posts.map(({ url, frontmatter }) => (
-						<BlogPostPreview
+					{posts.map(async ({ url, frontmatter, compiledContent }) => {
+						const firstParagraph = parseHtml(await compiledContent())
+							.querySelector('p:first-of-type');
+
+						return <BlogPostPreview
 							title={frontmatter.title}
-							description={frontmatter.description}
+							description={firstParagraph.innerText}
 							date={frontmatter.date}
 							url={url}
 						/>
-					))}
+					})}
 				</section>
 			</main>
 		</div>
